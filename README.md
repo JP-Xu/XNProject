@@ -4,7 +4,7 @@
 
 
 
-#### Group Members: Tanishq Bhatia, Yuyang Cao, Peter Wang, Paul Xi, Xueqi Xue, Jiaming Xu
+#### Group Members: Tanishq Bhatia, Yuyang Cao, Jieying Jin, Jundong Wang, Paul Xi, Jiaming Xu
 
 ---
 
@@ -19,6 +19,17 @@
 - The training set was directly aquired from the repository in the literature.
   - CancerTargetPrediction Github: https://github.com/storm-therapeutics/CancerTargetPrediction
  
+ ---
  
+ ## Machine Learning Models Used in Ths Work
  
+ - ANN (Tanishq Bhatia)
+ - SVM (Jieying Jin)
+ - KNN (Jiaming Xu)
+ - LDA/QDA (Jundong Wang)
+ - Logistic Regression (Xueqi Xue)
+ - Random Forest (Yuyang Cao)
+
+---
+
 

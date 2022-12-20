@@ -1,12 +1,21 @@
-## Northeastern University MATH 7243 - Final Project
+## Machine Learning Project - Target Gene Identification Through CRISPR KO Labelling
 
-#### Replicating the Work - Genome‑wide investigation of gene‑cancer associations for the prediction of novel therapeutic targets in oncology - https://doi.org/10.1038/s41598-020-67846-1
+Group Members: Tanishq Bhatia, Yuyang Cao, Jieying Jin, Jundong Wang, Paul Xi, Jiaming Xu
 
 
 
-#### Group Members: Tanishq Bhatia, Yuyang Cao, Jieying Jin, Jundong Wang, Paul Xi, Jiaming Xu
 
----
+## Introduction
+
+Suboptimal target selection will cause costly development of a modulator that is ineffective at treating the pathology of interest. Under this motivation, people in drug development area participated themselves into investigation of target selection and validation. Nowadays Computational intelligence methods are introduced and involved into the investigation. In this paper authors tried applying 6 different machine learning classifiers on data set obtain from public resource to work out drug target classification for nine different human cancer types which includes bladder, breast, kidney, colon, leukemia, liver, lung, ovarian and pancreatic.
+
+The fundamental requirement of training a machine learning model correctly and accurately is to use data that verified by some agency. Here, all of cancer targeted genes were acquired by looking U.S. Food and Drug Administration (FDA) approved cancer curing drugs and discovered cancer related genes. Those genes were used as the genes and positive labels of training data, along side with randomly selected human genes as negative labelled genes. For the ease of us and the time limit on this project, we obtained training data which contains gene symbol and labels from GitHub (https://github.com/storm-therapeutics/CancerTargetPrediction) of the literature we followed. There are 9 cancer types in total, and features were found based on those genes defined in the training data.
+
+Gene expressions, mutations, and essentiality are 3 primary features considered in this work based on basic biology knowledge. Gene expressions( EB++AdjustPANCAN\_IlluminaHiSeq\_RNASeqV2.geneExp.xena ) and mutations (mc3.v0.2.8.PUBLIC.nonsilentGene.xena) dataset were downloaded from University of California Santa Cruz (UCSC) Xena portal (https://xena.ucsc.edu). Those two datasets contain expression and mutations respectively with genes as features in column-wise and patients as observations in row-wise. Cancer types of patients were obtained from TCGA phenotype dataset (TCGA\_phenotype\_denseDataOnlyDownload.tsv) which was also downloaded from UCSC Xena portal. First, a per-cancer gene mutation rate was calculated by averaging along each genes with 1 for mutated and 0 for unmutated, and a per-cancer expression median was calculated by taking the median of each gene. Similarly, gene essentiality features were evaluated by taking the median of each gene from gene effect dataset (Achilles\_gene\_effect.csv) downloaded from DepMap website (http://depmap.org).
+
+In addition to those 3 primary features, there are 32 gene-gene interaction features were used in order to discovery some unknown correlation between genes and provide more information to machine learning models. To generate those 32 additional features, we first queried all human protein-coding genes from HumanMine website (http://humanmine.org). Then, we queried the BioGRID database REST Service (https://wiki.thebiogrid.org/doku.php/biogridrest) for gene-gene interaction for each gene. By this far, we got 18,898 human progein-coding genes and 570,342 gene-gene interaction information. We then computed 32 features by applying the 32 dimensional numerical embedding of the interaction network using sequence-based embedding with diffusion graphs, finished by using Diff2Vec python script that are available on Github (https://github.com/benedekrozemberczki/diff2vec). 
+
+Multivariate feature selection was performed on 32 dimensional gene-gene interaction features in order to screen out those insignificant ones. In order to perform multivariate feature selection, the importance results of each feature were calculated using Random Forest model, and z score of each feature was calculated. Normal distributed feature importance was calculated by shuffling labels 100 times and the mean and standard deviation of this normal distribution were used for z score calculation. At the end, features whose z score is larger than 1 were used for further use, i.e., training sets.
 
 ## Description of files
 
@@ -25,11 +34,12 @@
  
  - ANN (Tanishq Bhatia)
  - SVM (Jieying Jin)
- - KNN (Jiaming Xu)
  - LDA/QDA (Jundong Wang)
  - Logistic Regression (Xueqi Xue)
  - Random Forest (Yuyang Cao)
-
+ - Data collecting and processing (Jiaming Xu)
+ 
 ---
 
+This work is replicating the previous published ML paper for cancer gene predictions - Genome‑wide investigation of gene‑cancer associations for the prediction of novel therapeutic targets in oncology - https://doi.org/10.1038/s41598-020-67846-1
 
